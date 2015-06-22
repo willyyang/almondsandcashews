@@ -1,12 +1,11 @@
-# Meteor Spyfall
+# Meteor Oddity
 
-Spyfall on your mobile device!
+A game where one is an oddity and others are trying to vote the before the oddity find out 
 
-This is the code that currently runs [http://spyfall.meteor.com](http://spyfall.meteor.com). It's a simple site I've built as a learning project, so definitely don't use it as an example of Meteor best practices. Pull requests welcome!
 
 ## Disclaimer
 
-[Spyfall](http://international.hobbyworld.ru/catalog/25-spyfall/) is a party game designed by Alexandr Ushan and published by [Hobby World](http://international.hobbyworld.ru/). This is an unofficial fan project designed to complement the physical game, and is not endorsed in any way by the designer or publisher.
+This is a a fork of [Spyfall](https://github.com/evanbrumley/spyfall).I modified Spyfall's architecture to create this game. This is an unofficial fan project designed for personal use and is not endorsed in any way by the designer or publisher of the actual game
 
 ## Translations
 
