@@ -1,31 +1,11 @@
 # Meteor Oddity
 
-A game where one is an oddity and others are trying to vote the before the oddity find out 
+A game where one player is the odd one out and other players are trying to vote the oddity out before the oddity find out.
 
 
 ## Disclaimer
 
-This is a a fork of [Spyfall](https://github.com/evanbrumley/spyfall).I modified Spyfall's architecture to create this game. This is an unofficial fan project designed for personal use and is not endorsed in any way by the designer or publisher of the actual game
-
-## Translations
-
-If you'd like to see the site in your own language, there are two ways to contribute a translation - Transifex or pull request.
-
-### Transifex
-
-Transifex is an easy to use translation service. It has a nice interface and is great for non-programmers. Simply go to the following link:
-
-[https://www.transifex.com/projects/p/spyfall/](https://www.transifex.com/projects/p/spyfall/)
-
-Then click the big "Help Translate Spyfall" button. After creating a user account you should be able to start working on a translation right away. Once you're done, I'll be sent an email and will add your translation to the live site as soon as possible.
-
-### Pull request
-
-If you're comfortable with Github and JSON files, feel free to simply create a new file in the `spyfall/i18n` directory, using `en.i18n.json` as a base.
-
-### Notes for translators
-
-Please make sure that the translations you provide are as close as possible to the original meaning - try not to alter roles or locations, as I'd like the game to still be playable when different players in the same game are using different languages.
+This is a a fork of [Spyfall](https://github.com/evanbrumley/spyfall). I modified Spyfall's architecture to create this game. This is an unofficial fan project designed for personal use and is not endorsed in any way by the designer or publisher of the actual game
 
 ## Running your own instance with custom locations
 
@@ -33,11 +13,11 @@ Please make sure that the translations you provide are as close as possible to t
 
 Clone the repository:
 
-	git clone https://github.com/evanbrumley/spyfall.git ./spyfall
+	git clone https://github.com/paulliwali/oddity ./oddity
 
-Enter the spyfall directory:
+Enter the oddity directory:
 
-	cd spyfall/spyfall
+	cd oddity/oddity
 
 Edit the locations file as required:
 
@@ -57,5 +37,3 @@ Deploy to meteor:
 	meteor deploy myurl.meteor.com --settings settings/production.json
 
 ## Links
-
-[BoardGameGeek Discussion Thread](http://www.boardgamegeek.com/thread/1279239/app/page/1)
