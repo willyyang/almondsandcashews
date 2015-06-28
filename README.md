@@ -2,7 +2,7 @@
 
 A fun social game where one player is a **cashew**, and other players are **almonds** who are trying to find the cashew and vote it out! 
 
-The game is live on [almondsandcashews.meteor.com](almondsandcashews.meteor.com).
+The game is live on [almondsandcashews.meteor.com](http://almondsandcashews.meteor.com/).
 
 
 ## Disclaimer
