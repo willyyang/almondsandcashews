@@ -1,10 +1,12 @@
 {
     "ui": {
+        "welcome to almonds and cashews": "Welcome to Almonds and Cashews",
         "welcome to spyfall": "Welcome to Spyfall",
         "new game": "New Game",
         "join game": "Join Game",
         "waiting for players": "Waiting For Players...",
         "access code": "Access code",
+        "join my almonds and cashews game": "Join my Almonds and Cashews game!",
         "join my spyfall game": "Join my Spyfall game!",
         "start game": "Start Game",
         "leave game": "Leave Game",
@@ -13,6 +15,7 @@
         "you are not the spy": "You are <strong>not</strong> the spy!",
         "the location": "The location",
         "your role": "Your role",
+        "your item": "Your item",
         "players": "Players",
         "first": "1<span>st</span>",
         "location reference": "Location Reference",
@@ -306,7 +309,7 @@
                 "cook": "Cook",
                 "imprisoned nazi": "Imprisoned Nazi",
                 "soldier": "Soldier"
-            }   
+            }
         }
     }
 }

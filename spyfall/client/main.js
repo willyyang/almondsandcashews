@@ -44,7 +44,7 @@ function getLanguageList() {
   var languages = TAPi18n.getLanguages();
   var languageList = _.map(languages, function(value, key) {
     var selected = "";
-    
+
     if (key == getUserLanguage()){
       selected = "selected";
     }
@@ -55,11 +55,11 @@ function getLanguageList() {
       languageDetails: value
     };
   });
-  
+
   if (languageList.length <= 1){
     return null;
   }
-  
+
   return languageList;
 }
 
@@ -118,12 +118,17 @@ function generateNewGame(){
   return game;
 }
 
+// player has a few attributes: gameID, name, role, isSpy, isFirstPlayer
+// add a new attribute - isOdd to indicate the player with the odd item
+// add a new attribute - item to hold the item for the player
 function generateNewPlayer(game, name){
   var player = {
     gameID: game._id,
     name: name,
     role: null,
+    item: null,
     isSpy: false,
+    isOdd: false,
     isFirstPlayer: false
   };
 
@@ -132,11 +137,19 @@ function generateNewPlayer(game, name){
   return Players.findOne(playerID);
 }
 
+// new function
+// get a random pair of items for the game
+function getRandomItems(){
+  var itemIndex = Math.floor(Math.random() * items.length);
+  return items[itemIndex]
+}
+
 function getRandomLocation(){
   var locationIndex = Math.floor(Math.random() * locations.length);
   return locations[locationIndex];
 }
 
+// helper funciton used to shuflle roles for Spyfall
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -162,6 +175,27 @@ function assignRoles(players, location){
       }
 
       Players.update(player._id, {$set: {role: role}});
+    }
+  });
+}
+
+// new function
+// assign common item to non-odd players and update the player profile
+function assignItems(players, item){
+  // randomly generate a number of 0 or 1
+  var oddItem = item.itemA;
+  var commonItem = item.itemB;
+  var item = null;
+
+  players.forEach(function(player){
+    if (!player.isOdd){
+      item = commonItem;
+
+      Players.update(player._id, { $set: {item: item}});
+    } else {
+      item = oddItem;
+
+      Players.update(player._id, { $set: {item: item}});
     }
   });
 }
@@ -202,7 +236,7 @@ function trackGameState () {
   }
 }
 
-function leaveGame () {  
+function leaveGame () {
   GAnalytics.event("game-actions", "gameleave");
   var player = getCurrentPlayer();
 
@@ -291,7 +325,7 @@ Template.createGame.events({
     Meteor.subscribe('games', game.accessCode);
 
     Session.set("loading", true);
-    
+
     Meteor.subscribe('players', game._id, function onReady(){
       Session.set("loading", false);
 
@@ -417,22 +451,31 @@ Template.lobby.events({
 
     var game = getCurrentGame();
     var location = getRandomLocation();
+    var item = getRandomItems();
     var players = Players.find({gameID: game._id});
     var localEndTime = moment().add(game.lengthInMinutes, 'minutes');
     var gameEndTime = TimeSync.serverTime(localEndTime);
 
     var spyIndex = Math.floor(Math.random() * players.count());
+    // new variable to assign the odd player
+    var oddIndex = Math.floor(Math.random() * players.count());
     var firstPlayerIndex = Math.floor(Math.random() * players.count());
 
+    // update isOdd with the oddIndex
     players.forEach(function(player, index){
       Players.update(player._id, {$set: {
+        isOdd: index == oddIndex,
         isSpy: index === spyIndex,
         isFirstPlayer: index === firstPlayerIndex
       }});
     });
 
     assignRoles(players, location);
-    
+
+    // calling the new function to assign common items to majority and odd item
+    // to the isOdd player
+    assignItems(players, item);
+
     Games.update(game._id, {$set: {state: 'inProgress', location: location, endTime: gameEndTime, paused: false, pausedTime: null}});
   },
   'click .btn-toggle-qrcode': function () {
@@ -479,7 +522,7 @@ Template.gameView.helpers({
   player: getCurrentPlayer,
   players: function () {
     var game = getCurrentGame();
-    
+
     if (!game){
       return null;
     }
@@ -492,6 +535,9 @@ Template.gameView.helpers({
   },
   locations: function () {
     return locations;
+  },
+  items: function () {
+    return items
   },
   gameFinished: function () {
     var timeRemaining = getTimeRemaining();
