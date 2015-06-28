@@ -26,7 +26,9 @@
         "enter an access code": "Enter an access code",
         "invalid access code": "Sorry, no game was found with the access code you provided!",
         "join": "Join",
-        "footer": "<a href='http://international.hobbyworld.ru/catalog/25-spyfall/' target='_blank'>Spyfall</a> designed by Alexandr Ushan, published by <a href='http://international.hobbyworld.ru/' target='_blank'>Hobby World</a>"
+        "enter your items": "Enter your items",
+        "vote greg out": "Vote Greg Out",
+        "footer": "Almonds and Cashews is designed by Paul Deng, along with good friends Willy Yang, Brian Phan. It is based on <a href='https://github.com/evanbrumley/spyfall' target='_blank'>Spyfal by Evan Brumley.</a>"
     },
     "locations": {
         "airplane": "Airplane",
