@@ -1,11 +1,29 @@
-# Meteor Almonds & Cashews
+# Meteor - Almonds & Cashews
 
-A fun group game where one player is the odd one out - a cashew, and other players are almonds trying to find who is the cashew.
+A fun social game where one player is a **cashew**, and other players are **almonds** who are trying to find the cashew and vote it out!
 
 
 ## Disclaimer
 
 This is a a fork of [Spyfall](https://github.com/evanbrumley/spyfall). I modified Spyfall's architecture to create this game. This is an unofficial fan project designed for personal use and is not endorsed in any way by the designer or publisher of the actual game
+
+## Rules to the game
+
+*Goal:* the N-1 players to work together to vote out the player with the different item.
+
+*Gameplay:*
+
+Each player says a sentence about their item, this sentence has to be factual.
+
+	"I am edible"
+
+One round of AnC is complete when all players has said a sentence about their item. The players publicly discuss and vote for a player to be eliminated for being the **cashew**. For games of various sizes refer to the table below for voting rounds.
+
+<INSERT TABLE>
+
+When the **cashew** has been successfully voted out, it has a chance of redemption by guessing what the others are. If the **cashew** is successful in guessing the others are **almonds**, then the **cashew** wins; otherwise, the **almonds** wins.
+
+*Tips:*
 
 ## Running your own instance with custom locations
 
@@ -13,27 +31,22 @@ This is a a fork of [Spyfall](https://github.com/evanbrumley/spyfall). I modifie
 
 Clone the repository:
 
-	git clone https://github.com/paulliwali/oddity ./oddity
+	git clone https://github.com/paulliwali/almondsandcashews ./almondsandcashews
 
 Enter the oddity directory:
 
-	cd oddity/oddity
+	cd almondsandcashews/almondsandcashews
 
-Edit the locations file as required:
+Edit the items file as required:
 
-	nano lib/locations.js
+	vim lib/items.js
 
 Run the meteor server to test locally:
 
-	meteor --settings settings/example.json
-
-Make a production settings file:
-
-	cp settings/example.json settings/production.json
-	nano settings/production.json  # Edit as required
+	meteor
 
 Deploy to meteor:
 
-	meteor deploy myurl.meteor.com --settings settings/production.json
+	meteor deploy myurl.meteor.com
 
 ## Links
