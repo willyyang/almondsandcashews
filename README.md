@@ -1,6 +1,6 @@
-# Meteor Oddity
+# Meteor Almonds & Cashews
 
-A game where one player is the odd one out and other players are trying to vote the oddity out before the oddity find out.
+A fun group game where one player is the odd one out - a cashew, and other players are almonds trying to find who is the cashew.
 
 
 ## Disclaimer
