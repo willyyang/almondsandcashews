@@ -101,15 +101,8 @@
 
 <template name="gameView">
   <h4><a href="#" class="game-countdown {{#if gameFinished }}finished{{/if}} {{#if game.paused }}paused{{/if}}">{{{ timeRemaining }}}</a></h4>
-
-  <div class="status-container">
-    <button class="btn-toggle-status">{{_ "ui.show hide" }}</button>
-
-    <div class="status-container-content">
-      {{#if player.isOdd }}
-        <div class="player-status player-status-spy">{{_ "you are the odd player" }}</div>
-
-        <div class="current-role">
+  
+  <div class="current-role">
           <div class="current-role-header">
             {{_ "ui.your item" }}:
           </div>
@@ -117,18 +110,18 @@
             {{_ player.item }}
           </div>
         </div>
+  <div class="status-container">
 
+    <button class="btn-toggle-status">{{_ "ui.show hide" }}</button>
+
+    <div class="status-container-content"  style="display:none">
+
+      {{#if player.isOdd }}
+      <button id="player-status player-status-spy">{{_ "you are the odd player." }}</button>
+        <!-- <div class="player-status player-status-spy">{{_ "you are the odd player" }}</div> -->
       {{else}}
         <div class="player-status player-status-not-spy">{{{_ "you are not the odd player" }}}</div>
 
-        <div class="current-role">
-          <div class="current-role-header">
-            {{_ "ui.your item" }}:
-          </div>
-          <div class="current-role-name">
-            {{_ player.item }}
-          </div>
-        </div>
       {{/if}}
     </div>
   </div>
@@ -181,6 +174,7 @@
   <form id="create-game">
     <div class="">
       <input type="text" id="player-name" name="playerName" placeholder='{{_ "ui.enter your name" }}'>
+      <input type="text" id="item-name" name="itemName" placeholder='{{_ "ui.enter your items" }}'>
 
       <div class="button-container">
         <input type="submit" value='{{_ "ui.create game" }}'>
