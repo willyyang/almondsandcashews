@@ -125,9 +125,7 @@ function generateNewPlayer(game, name){
   var player = {
     gameID: game._id,
     name: name,
-    role: null,
     item: null,
-    isSpy: false,
     isOdd: false,
     isFirstPlayer: false
   };
@@ -137,54 +135,22 @@ function generateNewPlayer(game, name){
   return Players.findOne(playerID);
 }
 
-// new function
-// get a random pair of items for the game
 function getRandomItems(){
   var itemIndex = Math.floor(Math.random() * items.length);
   return items[itemIndex]
 }
 
-function getRandomLocation(){
-  var locationIndex = Math.floor(Math.random() * locations.length);
-  return locations[locationIndex];
-}
-
-// helper funciton used to shuflle roles for Spyfall
-function shuffleArray(array) {
-    for (var i = array.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-    return array;
-}
-
-function assignRoles(players, location){
-  var default_role = location.roles[location.roles.length - 1];
-  var roles = location.roles.slice();
-  var shuffled_roles = shuffleArray(roles);
-  var role = null;
-
-  players.forEach(function(player){
-    if (!player.isSpy){
-      role = shuffled_roles.pop();
-
-      if (role === undefined){
-        role = default_role;
-      }
-
-      Players.update(player._id, {$set: {role: role}});
-    }
-  });
-}
-
-// new function
-// assign common item to non-odd players and update the player profile
 function assignItems(players, item){
-  // randomly generate a number of 0 or 1
-  var oddItem = item.itemA;
-  var commonItem = item.itemB;
+
+  //Yeah...not very smart but I can't think atm
+  var randomNumber = Math.floor((Math.random() * 10) + 1);
+  if (randomNumber % 2 == 0) {
+    var oddItem = item.itemA;
+    var commonItem = item.itemB;
+  } else {
+    var oddItem = item.itemB;
+    var commonItem = item.itemA;
+  }
   var item = null;
 
   players.forEach(function(player){
@@ -450,32 +416,24 @@ Template.lobby.events({
     GAnalytics.event("game-actions", "gamestart");
 
     var game = getCurrentGame();
-    var location = getRandomLocation();
     var item = getRandomItems();
     var players = Players.find({gameID: game._id});
     var localEndTime = moment().add(game.lengthInMinutes, 'minutes');
     var gameEndTime = TimeSync.serverTime(localEndTime);
-
-    var spyIndex = Math.floor(Math.random() * players.count());
-    // new variable to assign the odd player
     var oddIndex = Math.floor(Math.random() * players.count());
     var firstPlayerIndex = Math.floor(Math.random() * players.count());
 
-    // update isOdd with the oddIndex
     players.forEach(function(player, index){
       Players.update(player._id, {$set: {
         isOdd: index == oddIndex,
-        isSpy: index === spyIndex,
         isFirstPlayer: index === firstPlayerIndex
       }});
     });
 
-    assignRoles(players, location);
-
-    // calling the new function to assign common items to majority and odd item
-    // to the isOdd player
     assignItems(players, item);
 
+    // THIS FUNCITON MIGHT NEED TO BE LOOKED AT
+    // IMPROVE PERFORMANCE OR THE PROBLEM OF CERTAIN PLAYERS GETTING ODD ONLY
     Games.update(game._id, {$set: {state: 'inProgress', location: location, endTime: gameEndTime, paused: false, pausedTime: null}});
   },
   'click .btn-toggle-qrcode': function () {
@@ -532,9 +490,6 @@ Template.gameView.helpers({
     });
 
     return players;
-  },
-  locations: function () {
-    return locations;
   },
   items: function () {
     return items
