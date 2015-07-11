@@ -101,7 +101,7 @@
 
 <template name="gameView">
   <h4><a href="#" class="game-countdown {{#if gameFinished }}finished{{/if}} {{#if game.paused }}paused{{/if}}">{{{ timeRemaining }}}</a></h4>
-  
+
   <div class="current-role">
           <div class="current-role-header">
             {{_ "ui.your item" }}:
@@ -172,9 +172,13 @@
   <hr>
 
   <form id="create-game">
+    <div class="button-container">
+      <input type="radio" id= "selected-mode" name="selectedMode" value="classic" class="location-name"> {{_ "ui.classic"}}
+      <input type="radio" id= "selected-mode" name="selectedMode" value="advanced" class="location-name"> {{_ "ui.advanced"}}
+    </div>
+
     <div class="">
       <input type="text" id="player-name" name="playerName" placeholder='{{_ "ui.enter your name" }}'>
-      <input type="text" id="item-name" name="itemName" placeholder='{{_ "ui.enter your items" }}'>
 
       <div class="button-container">
         <input type="submit" value='{{_ "ui.create game" }}'>
