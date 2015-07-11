@@ -101,10 +101,20 @@ function generateAccessCode(){
     return code;
 }
 
+function getRadioValue(theRadioGroup){
+  var elements = document.getElementsByName(theRadioGroup);
+  for (var i = 0, l = elements.length; i < l; i++){
+    if (elements[i].checked){
+      return elements[i].value;
+    }
+  }
+}
+
 function generateNewGame(){
   var game = {
     accessCode: generateAccessCode(),
     state: "waitingForPlayers",
+    gameMode: null,
     location: null,
     lengthInMinutes: 8,
     endTime: null,
@@ -280,12 +290,16 @@ Template.createGame.events({
     GAnalytics.event("game-actions", "newgame");
 
     var playerName = event.target.playerName.value;
+<<<<<<< HEAD
     var itemName = event.target.itemName.value;
 
+=======
+>>>>>>> 455dacec5404c07350d4700f1ff87ffe23160da3
     if (!playerName) {
       return false;
     }
 
+    var gameMode = getRadioValue('selectedMode');
     var game = generateNewGame();
     var player = generateNewPlayer(game, playerName);
 
@@ -301,8 +315,20 @@ Template.createGame.events({
       Session.set("currentView", "lobby");
     });
 
+
+    // if (gameMode == "classic"){
+    //   Session.set("currentView", "gameView");
+    //   console.log(gameMode);
+    // } else if (gameMode == "advanced") {
+    //   Session.set("currentView", "gameView");
+    //   console.log(gameMode);
+    // } else {
+    //   Session.set("currentView", "gameView");
+    // }
+
     return false;
   },
+
   'click .btn-back': function () {
     Session.set("currentView", "startMenu");
     return false;
