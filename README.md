@@ -15,7 +15,7 @@ This is a a fork of [Spyfall](https://github.com/evanbrumley/spyfall). I modifie
 
 Each player says a sentence about their item, this sentence has to be factual.
 
-	"I am edible"
+	"I am edible" "test commit"
 
 One round of AnC is complete when all players has said a sentence about their item. The players publicly discuss and vote for a player to be eliminated for being the **cashew**. For games of various sizes refer to the table below for voting rounds.
 
