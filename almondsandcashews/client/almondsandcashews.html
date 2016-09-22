@@ -1,6 +1,6 @@
 <head>
   <meta charset="utf-8">
-  <title>Almonds and Cashews</title>
+  <title>Almond and Cashews</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
@@ -9,9 +9,28 @@
   <link rel="stylesheet" href="css/normalize.css" type="text/css">
   <link rel="stylesheet" href="css/skeleton.css" type="text/css">
   <link rel="stylesheet" href="css/styles.css" type="text/css">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 </head>
 
-<body></body>
+<body>
+
+</body>
 
 <!-- main template -->
 <template name="main">
@@ -28,7 +47,7 @@
 
 <template name="startMenu">
   <div class="main-menu">
-    <h4>{{_ "ui.welcome to almonds and cashews" }}</h4>
+    <img class="logo" src="/img/logo.png" alt="welcome to almond and cashews">
 
     <hr>
 
@@ -58,7 +77,7 @@
 
     <span class="access-button-separator"></span>
 
-    <a class="access-button btn-send-access-code-email" href='mailto:?subject={{_ "ui.join my almonds and cashews game" }}&body={{ accessLink }}'>
+    <a class="access-button btn-send-access-code-email" href='mailto:?subject={{_ "ui.join my almond and cashews game" }}&body={{ accessLink }}'>
       <i class="fa fa-envelope-o"></i>
     </a>
   </div>
@@ -99,74 +118,108 @@
   </div>
 </template>
 
-<template name="gameView">
-  <h4><a href="#" class="game-countdown {{#if gameFinished }}finished{{/if}} {{#if game.paused }}paused{{/if}}">{{{ timeRemaining }}}</a></h4>
-<<<<<<< Updated upstream
+<template name="lobbyAdvanced">
+  <h4>{{_ "ui.waiting for players" }}</h4>
 
-<<<<<<< HEAD
-  <div class="status-container">
-    <button class="btn-toggle-status">{{_ "ui.show hide" }}</button>
+  <div class="access-code">
+    {{_ "ui.access code" }}:
+    <span>{{ game.accessCode }}</span>
+  </div>
 
-    <div class="status-container-content">
-      {{#if player.isOdd }}
-        <div class="player-status player-status-spy">{{_ "you are the odd player" }}</div>
+  <div class="access-buttons">
+    <a class="access-button btn-toggle-qrcode" href="javascript:void(0);">
+      <i class="fa fa-qrcode"></i>
+    </a>
 
-        <div class="current-role">
-=======
-  
-  <div class="status-container">
+    <span class="access-button-separator"></span>
 
-    <button class="btn-toggle-status">{{_ "ui.show hide" }}</button>
+    <a class="access-button btn-send-access-code-email" href='mailto:?subject={{_ "ui.join my almond and cashews game" }}&body={{ accessLink }}'>
+      <i class="fa fa-envelope-o"></i>
+    </a>
+  </div>
 
-    <div class="status-container-content">
+  <div class="qrcode-container" style="display: none;">
+    <div id="qrcode" class="qrcode"></div>
 
-      {{#if player.isOdd }}
-      <div class="player-status player-status-spy">{{_ "you are the odd player." }}</div>
-       <div class="current-role">
->>>>>>> Stashed changes
-=======
-  <div class="current-role">
->>>>>>> 455dacec5404c07350d4700f1ff87ffe23160da3
-          <div class="current-role-header">
-            {{_ "ui.your item" }}:
-          </div>
-          <div class="current-role-name">
-            {{_ player.item }}
+    <div id="access-link" class="access-link">
+      <a href="{{ accessLink }}">{{ accessLink }}</a>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="advanced-mode-input-container">
+      <h5>{{_ "ui.category is" }}{{_ game.category }} </h5>
+      <form id="category-input">
+        <div>
+          <input autocorrect="off" autocapitalize="off" type="text" id="category-item" name="categoryItem" placeholder='{{_ "ui.enter a related item" }}'>
+
+          <div class="button-container">
+            <input type="submit" value='{{_ "ui.submit" }}'>
           </div>
         </div>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-  <div class="status-container">
+      </form>
+  </div>
 
+  <hr>
+
+  <ol class="lobby-player-list">
+    {{#each players }}
+      <li>
+        {{ name }}
+
+        {{#if isCurrent }}
+          <a href="#" class="btn-edit-player" data-player-id="{{ _id }}">
+            <i class="fa fa-pencil"></i>
+          </a>
+        {{else}}
+          <a href="#" class="btn-remove-player" data-player-id="{{ _id }}">
+            <i class="fa fa-close"></i>
+          </a>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ol>
+
+  <hr>
+
+  <div class="button-container">
+    <button class="btn-start">{{_ "ui.start game" }}</button>
+    <button class="btn-leave">{{_ "ui.leave game" }}</button>
+  </div>
+</template>
+
+<template name="gameView">
+
+  <h4><a href="#" class="game-countdown {{#if gameFinished }}finished{{/if}} {{#if game.paused }}paused{{/if}}">{{{ timeRemaining }}}</a></h4>
+
+  {{> flashMessages }}
+
+  {{#unless player.votedOut }}
+  <div class="status-container">
     <button class="btn-toggle-status">{{_ "ui.show hide" }}</button>
 
     <div class="status-container-content"  style="display:none">
->>>>>>> 455dacec5404c07350d4700f1ff87ffe23160da3
-
       {{#if player.isOdd }}
-      <button id="player-status player-status-spy">{{_ "you are the odd player." }}</button>
-        <!-- <div class="player-status player-status-spy">{{_ "you are the odd player" }}</div> -->
+      <div class="player-status player-status-spy">{{_ "you are the odd player" }}</div>
+      <div class="current-role">
+        <div class="current-role-header">
+          {{_ "ui.your item" }}:
+        </div>
+      <div class="current-role-name">
+        {{_ player.item }}
+      </div>
+    </div>
       {{else}}
         <div class="player-status player-status-not-spy">{{{_ "you are not the odd player" }}}</div>
-
-<<<<<<< HEAD
         <div class="current-role">
-=======
-        <!-- <div class="player-status player-status-spy">{{_ "you are the odd player" }}</div> -->
-      {{else}}
-        <div class="player-status player-status-not-spy">{{{_ "you are not the odd player" }}}</div>
-         <div class="current-role">
->>>>>>> Stashed changes
           <div class="current-role-header">
             {{_ "ui.your item" }}:
           </div>
-          <div class="current-role-name">
-            {{_ player.item }}
-          </div>
+        <div class="current-role-name">
+          {{_ player.item }}
         </div>
-=======
->>>>>>> 455dacec5404c07350d4700f1ff87ffe23160da3
+      </div>
       {{/if}}
     </div>
   </div>
@@ -187,7 +240,7 @@
 
   <div class="u-cf"></div>
 
-  <h5>{{_ "item reference - testing"}}</h5>
+  <h5>{{_ "item reference - testing" }}</h5>
 
   <ul class="location-list">
     {{#each items }}
@@ -200,22 +253,58 @@
 
   <hr>
 
+  <h5>{{_ "advanced item reference - testing" }}</h5>
+
+  <ul class="location-list">
+    <div class="location-name">
+      {{#each game.items }}
+        {{_ item}}
+      {{/each}}
+    </div>
+  </ul>
+
+  <hr>
+
   <h5>{{_ "Players - test"}}</h5>
   <ul class="location-list">
     {{#each players }}
-      <label>   
-        <input id= "selected-player" name="selectedPlayer" class="location-name" type="radio" value="{{ _name }}" > {{name}} 
-      </label>
+      {{#if dontHide}}
+        <label>
+          <input id="selected-player" name="selectedPlayer" class="location-name" type="radio" value="{{ _id }}" > {{name}}
+        </label>
+      {{/if}}
     {{/each}}
-  
   </ul>
+
   <hr>
 
   <div class="button-container">
     <button class="btn-end">{{_ "ui.end game" }}</button>
+    <button class="btn-restart">{{_ "ui.restart game" }}</button>
     <button class="btn-leave">{{_ "ui.leave game" }}</button>
-    <button class="btn-vote">{{_ "ui.vote greg out"}}</button>
+    <button class="btn-vote">{{_ "ui.vote greg out" }}</button>
   </div>
+
+  {{else}}
+    {{#if player.dontHide}}
+      <div class="randomblock">
+        <h4>You are temporarily out of the game.</h4>
+        <div class="button-container">
+          <button class="btn-end">{{_ "ui.end game" }}</button>
+          <button class="btn-leave">{{_ "ui.leave game" }}</button>
+        </div>
+      </div>
+    {{else}}
+      <div class="randomblock">
+        <h4>You are voted out of the game. Waiting for next game to start.</h4>
+        <div class="button-container">
+          <button class="btn-end">{{_ "ui.end game" }}</button>
+          <button class="btn-leave">{{_ "ui.leave game" }}</button>
+        </div>
+      </div>
+    {{/if}}
+  {{/unless}}
+
 </template>
 
 <template name="createGame">
@@ -223,7 +312,7 @@
     {{#if isLoading }}
       <span class="spinner"></span>
     {{else}}
-      {{_ "ui.welcome to almonds and cashews" }}
+      <img class="logo" src="/img/logo.png" alt="welcome to almond and cashews">
     {{/if}}
   </h4>
 
@@ -237,7 +326,6 @@
 
     <div class="">
       <input type="text" id="player-name" name="playerName" placeholder='{{_ "ui.enter your name" }}'>
-      <input type="text" id="item-name" name="itemName" placeholder='{{_ "ui.enter your items" }}'>
 
       <div class="button-container">
         <input type="submit" value='{{_ "ui.create game" }}'>
@@ -252,7 +340,7 @@
     {{#if isLoading }}
       <span class="spinner"></span>
     {{else}}
-      {{_ "ui.welcome to almonds and cashews" }}
+      <img class="logo" src="/img/logo.png" alt="welcome to almond and cashews">
     {{/if}}
   </h4>
 
